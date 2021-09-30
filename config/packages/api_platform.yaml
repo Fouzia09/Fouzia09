@@ -1,5 +1,5 @@
 api_platform:
-    title: 'Symfony REST API'
+    title: 'REST API GYFE'
     description: 'Notre API GYFE'
     version: '1.0.0'
     mapping:
