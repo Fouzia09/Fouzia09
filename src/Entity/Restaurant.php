@@ -74,6 +74,12 @@ class Restaurant
      */
     private $rangePrice;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="restaurants")
+     */
+    private $users;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -210,4 +216,18 @@ class Restaurant
 
         return $this;
     }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+
 }

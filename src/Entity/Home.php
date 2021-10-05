@@ -49,6 +49,12 @@ class Home
      */
     private $image3;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="homes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +128,18 @@ class Home
     public function setImage3(?string $image3): self
     {
         $this->image3 = $image3;
+
+        return $this;
+    }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }

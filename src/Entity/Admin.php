@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\AdminRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +26,18 @@ class Admin
      */
     private $isAdmin;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Role::class, mappedBy="admins", orphanRemoval=true)
+     */
+    private $roles;
+
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -40,4 +54,38 @@ class Admin
 
         return $this;
     }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getRoles(): Collection
+    {
+        return $this->roles;
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+            $role->setAdmins($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        if ($this->roles->removeElement($role)) {
+            // set the owning side to null (unless already changed)
+            if ($role->getAdmins() === $this) {
+                $role->setAdmins(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }
