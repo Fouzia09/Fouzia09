@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\RestaurantRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RestaurantRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"restaurant:read"}},
+ *      denormalizationContext={"groups"={"restaurant:write"}}
+ * )
  * @ORM\Entity(repositoryClass=RestaurantRepository::class)
  */
 class Restaurant
@@ -16,68 +20,101 @@ class Restaurant
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups("restaurant:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $descriptif;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $namePlat;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $descriptifPlat;
 
     /**
      * @ORM\Column(type="float")
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $image1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $image2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $image3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $descriptifPlat2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $descriptifPlat3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $rangePrice;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="restaurants")
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups("restaurant:read")
+     */
+    private $slug;
 
 
     public function getId(): ?int
@@ -225,6 +262,18 @@ class Restaurant
     public function setUsers(?User $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

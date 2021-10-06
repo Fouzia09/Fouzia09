@@ -2,14 +2,18 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"user:read"}},
+ *      denormalizationContext={"groups"={"user:write"}}
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
@@ -19,21 +23,29 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups("user:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"user:read", "user:write"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"user:read", "user:write"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups("user:write")
      */
     private $password;
 
@@ -44,27 +56,31 @@ class User
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users")
+     * 
+     * @Groups("user:read")
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Restaurant::class, mappedBy="users")
+     * 
+     * @Groups("user:read")
      */
     private $restaurants;
 
     /**
-     * @ORM\OneToMany(targetEntity=Home::class, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Chamber::class, mappedBy="users")
+     * 
+     * @Groups("user:read")
      */
-    private $homes;
-
-
+    private $chambers;
 
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
-        $this->homes = new ArrayCollection();
+        $this->chambers = new ArrayCollection();
         
     }
 
@@ -194,29 +210,29 @@ class User
     }
 
     /**
-     * @return Collection|Home[]
+     * @return Collection|Chamber[]
      */
-    public function getHomes(): Collection
+    public function getChambers(): Collection
     {
-        return $this->homes;
+        return $this->chambers;
     }
 
-    public function addHome(Home $home): self
+    public function addChamber(Chamber $chamber): self
     {
-        if (!$this->homes->contains($home)) {
-            $this->homes[] = $home;
-            $home->setUsers($this);
+        if (!$this->chambers->contains($chamber)) {
+            $this->chambers[] = $chamber;
+            $chamber->setUsers($this);
         }
 
         return $this;
     }
 
-    public function removeHome(Home $home): self
+    public function removeChamber(Chamber $chamber): self
     {
-        if ($this->homes->removeElement($home)) {
+        if ($this->chambers->removeElement($chamber)) {
             // set the owning side to null (unless already changed)
-            if ($home->getUsers() === $this) {
-                $home->setUsers(null);
+            if ($chamber->getUsers() === $this) {
+                $chamber->setUsers(null);
             }
         }
 

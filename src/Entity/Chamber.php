@@ -2,58 +2,85 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\HomeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ChamberRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=HomeRepository::class)
+ * @ApiResource(
+ *      normalizationContext={"groups"={"chamber:read"}},
+ *      denormalizationContext={"groups"={"chamber:write"}}
+ * )
+ * @ORM\Entity(repositoryClass=ChamberRepository::class)
  */
-class Home
+class Chamber
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups("chamber:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"chamber:read", "chamber:write"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"chamber:read", "chamber:write"})
      */
     private $descriptif;
 
     /**
      * @ORM\Column(type="float")
+     * 
+     * @Groups({"chamber:read", "chamber:write"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"chamber:read", "chamber:write"})
      */
     private $image1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"chamber:read", "chamber:write"})
      */
     private $image2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Groups({"chamber:read", "chamber:write"})
      */
     private $image3;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="homes")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chambers")
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Groups({"chamber:read", "chamber:write"})
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups("chamber:read")
+     */
+    private $slug;
 
     public function getId(): ?int
     {
@@ -140,6 +167,18 @@ class Home
     public function setUsers(?User $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
