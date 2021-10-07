@@ -49,7 +49,6 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * 
-     * @Groups({"comment:read", "comment:write"})
      */
     private $users;
 

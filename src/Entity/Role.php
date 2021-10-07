@@ -37,7 +37,6 @@ class Role
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="roles")
      * 
-     * @Groups("role:read")
      */
     private $users;
 

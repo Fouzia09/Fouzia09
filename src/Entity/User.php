@@ -57,21 +57,18 @@ class User
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users")
      * 
-     * @Groups("user:read")
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Restaurant::class, mappedBy="users")
      * 
-     * @Groups("user:read")
      */
     private $restaurants;
 
     /**
      * @ORM\OneToMany(targetEntity=Chamber::class, mappedBy="users")
      * 
-     * @Groups("user:read")
      */
     private $chambers;
 
