@@ -71,15 +71,26 @@ class Chamber
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chambers")
      * @ORM\JoinColumn(nullable=false)
      * 
+     * @Groups("chamber:write")
      */
     private $users;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * 
      * @Groups("chamber:read")
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -178,6 +189,18 @@ class Chamber
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

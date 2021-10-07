@@ -51,11 +51,15 @@ class User
 
     /**
      * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
+     * 
+     * @Groups("user:read")
      */
     private $roles;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users")
+     * 
+     * @Groups({"user:read", "user:write"})
      * 
      */
     private $comments;
@@ -63,14 +67,21 @@ class User
     /**
      * @ORM\OneToMany(targetEntity=Restaurant::class, mappedBy="users")
      * 
+     * @Groups({"user:read", "user:write"})
      */
     private $restaurants;
 
     /**
      * @ORM\OneToMany(targetEntity=Chamber::class, mappedBy="users")
      * 
+     * @Groups({"user:read", "user:write"})
      */
     private $chambers;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -78,6 +89,7 @@ class User
         $this->comments = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
         $this->chambers = new ArrayCollection();
+        $this->createdAt = new \DateTime();
         
     }
 
@@ -232,6 +244,18 @@ class User
                 $chamber->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
