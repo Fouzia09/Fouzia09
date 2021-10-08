@@ -105,7 +105,7 @@ class Restaurant
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="restaurants")
      * 
-     * @Groups("restaurant:write")
+     * @Groups("restaurant:read")
      */
     private $users;
 

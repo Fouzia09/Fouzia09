@@ -71,7 +71,7 @@ class Chamber
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chambers")
      * @ORM\JoinColumn(nullable=false)
      * 
-     * @Groups("chamber:write")
+     * @Groups("chamber:read")
      */
     private $users;
 
