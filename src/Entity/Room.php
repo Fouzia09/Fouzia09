@@ -3,74 +3,74 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ChamberRepository;
+use App\Repository\RoomRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *      normalizationContext={"groups"={"chamber:read"}},
- *      denormalizationContext={"groups"={"chamber:write"}}
+ *      normalizationContext={"groups"={"room:read"}},
+ *      denormalizationContext={"groups"={"room:write"}}
  * )
- * @ORM\Entity(repositoryClass=ChamberRepository::class)
+ * @ORM\Entity(repositoryClass=RoomRepository::class)
  */
-class Chamber
+class Room
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups("chamber:read")
+     * @Groups("room:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"chamber:read", "chamber:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"chamber:read", "chamber:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $descriptif;
 
     /**
      * @ORM\Column(type="float")
      * 
-     * @Groups({"chamber:read", "chamber:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"chamber:read", "chamber:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $image1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"chamber:read", "chamber:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $image2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * 
-     * @Groups({"chamber:read", "chamber:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $image3;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * 
-     * @Groups("chamber:read")
+     * @Groups("room:read")
      */
     private $slug;
 

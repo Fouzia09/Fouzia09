@@ -35,7 +35,7 @@ class Comment
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"comment:read", "comment:write"})
+     * @Groups({"comment:read", "comment:write", "restaurant:read"})
      */
     private $content;
 
@@ -43,6 +43,13 @@ class Comment
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups("comment:write")
+     */
+    private $restaurant;
 
     public function __construct()
     {
@@ -87,6 +94,18 @@ class Comment
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getRestaurant(): ?Restaurant
+    {
+        return $this->restaurant;
+    }
+
+    public function setRestaurant(?Restaurant $restaurant): self
+    {
+        $this->restaurant = $restaurant;
 
         return $this;
     }

@@ -4,7 +4,7 @@
 
 namespace App\DataPersister;
 
-use App\Entity\Chamber;
+use App\Entity\Room;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
@@ -12,7 +12,7 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 /**
  *
  */
-class ChamberDataPersister implements ContextAwareDataPersisterInterface
+class RoomDataPersister implements ContextAwareDataPersisterInterface
 {
     /**
      * @var EntityManagerInterface
@@ -33,11 +33,11 @@ class ChamberDataPersister implements ContextAwareDataPersisterInterface
      */
     public function supports($data, array $context = []): bool
     {
-        return $data instanceof Chamber;
+        return $data instanceof Room;
     }
 
     /**
-     * @param Chamber $data
+     * @param Room $data
      */
     public function persist($data, array $context = [])
     {

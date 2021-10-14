@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RestaurantRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -21,7 +23,7 @@ class Restaurant
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups("restaurant:read")
+     * @Groups("restaurant:read", "user: read")
      */
     private $id;
 
@@ -114,9 +116,23 @@ class Restaurant
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="restaurant", orphanRemoval=true)
+     * @Groups("restaurant:read")
+     */
+    private $comments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="restaurants")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups("restaurant:read")
+     */
+    private $author;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -278,6 +294,48 @@ class Restaurant
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getRestaurant() === $this) {
+                $comment->setRestaurant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
