@@ -40,13 +40,6 @@ class Comment
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
-     * 
-     * @Groups("comment:read")
-     */
-    private $users;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -82,18 +75,6 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getUsers(): ?User
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?User $users): self
-    {
-        $this->users = $users;
 
         return $this;
     }

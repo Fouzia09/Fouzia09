@@ -68,14 +68,6 @@ class Chamber
     private $image3;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chambers")
-     * @ORM\JoinColumn(nullable=false)
-     * 
-     * @Groups("chamber:read")
-     */
-    private $users;
-
-    /**
      * @ORM\Column(type="string", length=255, unique=true)
      * 
      * @Groups("chamber:read")
@@ -165,18 +157,6 @@ class Chamber
     public function setImage3(?string $image3): self
     {
         $this->image3 = $image3;
-
-        return $this;
-    }
-
-    public function getUsers(): ?User
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?User $users): self
-    {
-        $this->users = $users;
 
         return $this;
     }

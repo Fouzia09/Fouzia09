@@ -103,13 +103,6 @@ class Restaurant
     private $rangePrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="restaurants")
-     * 
-     * @Groups("restaurant:read")
-     */
-    private $users;
-
-    /**
      * @ORM\Column(type="string", length=255, unique=true)
      * 
      * @Groups("restaurant:read")
@@ -261,18 +254,6 @@ class Restaurant
     public function setRangePrice(?string $rangePrice): self
     {
         $this->rangePrice = $rangePrice;
-
-        return $this;
-    }
-
-    public function getUsers(): ?User
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?User $users): self
-    {
-        $this->users = $users;
 
         return $this;
     }
