@@ -21,26 +21,28 @@ class Comment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups("comment:read")
+     * @Groups({"comment:read", "restaurant:read", "room:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"comment:read", "comment:write"})
+     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"comment:read", "comment:write", "restaurant:read"})
+     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
      */
     private $createdAt;
 
@@ -50,6 +52,19 @@ class Comment
      * @Groups("comment:write")
      */
     private $restaurant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Room::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups("comment:write")
+     */
+    private $room;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -106,6 +121,30 @@ class Comment
     public function setRestaurant(?Restaurant $restaurant): self
     {
         $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getRoom(): ?Room
+    {
+        return $this->room;
+    }
+
+    public function setRoom(?Room $room): self
+    {
+        $this->room = $room;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -24,18 +24,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("user:read", "restaurant:read")
+     * @Groups("user:read", "restaurant:read", "room:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * 
      * @Groups({"user:read", "user:write"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * 
      * @Groups("user:read")
      */
     private $roles = [];
@@ -48,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      * @Groups({"user:read", "user:write"})
      */
     private $name;
@@ -64,20 +67,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * 
+     * @Groups({"user:read", "user:write", "restaurant:read", "room:read"})
      */
     private $username;
 
     /**
      * @ORM\OneToMany(targetEntity=Restaurant::class, mappedBy="author")
+     * 
      * @Groups("user:read")
      */
     private $restaurants;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Favorite::class, mappedBy="users")
+     * 
+     * @Groups("user:read")
+     */
+    private $favorites;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user", orphanRemoval=true)
+     * 
+     * @Groups("user:read")
+     */
+    private $comments;
+
+    /**
+     * @ORM\Column(type="string", length=14, nullable=true)
+     */
+    private $siret;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Room::class, mappedBy="author")
+     */
+    private $rooms;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->restaurants = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->rooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -236,6 +268,105 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($restaurant->getAuthor() === $this) {
                 $restaurant->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
+    public function addFavorite(Favorite $favorite): self
+    {
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): self
+    {
+        if ($this->favorites->removeElement($favorite)) {
+            $favorite->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSiret(): ?string
+    {
+        return $this->siret;
+    }
+
+    public function setSiret(string $siret): self
+    {
+        $this->siret = $siret;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Room[]
+     */
+    public function getRooms(): Collection
+    {
+        return $this->rooms;
+    }
+
+    public function addRoom(Room $room): self
+    {
+        if (!$this->rooms->contains($room)) {
+            $this->rooms[] = $room;
+            $room->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoom(Room $room): self
+    {
+        if ($this->rooms->removeElement($room)) {
+            // set the owning side to null (unless already changed)
+            if ($room->getAuthor() === $this) {
+                $room->setAuthor(null);
             }
         }
 
