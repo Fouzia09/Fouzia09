@@ -12,7 +12,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"restaurant:read"}},
- *      denormalizationContext={"groups"={"restaurant:write"}}
+ *      denormalizationContext={"groups"={"restaurant:write"}},
+ *      collectionOperations={
+ *         "get",
+ *         "post"={"security"="is_granted('ROLE_USER')"}
+ *     },
+ *     itemOperations={
+ *         "get",
+ *         "put"={"security"="is_granted('edit', object)"},
+ *         "delete"={"security"="is_granted('delete', object)"}
+ *     }
  * )
  * @ORM\Entity(repositoryClass=RestaurantRepository::class)
  */
@@ -128,6 +137,18 @@ class Restaurant
      * @Groups("restaurant:read")
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups("restaurant:read")
+     */
+    private $isPublished;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("restaurant:read")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -336,6 +357,30 @@ class Restaurant
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(?bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

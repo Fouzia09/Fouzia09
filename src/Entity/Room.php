@@ -12,7 +12,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"room:read"}},
- *      denormalizationContext={"groups"={"room:write"}}
+ *      denormalizationContext={"groups"={"room:write"}},
+ *      collectionOperations={
+ *         "get",
+ *         "post"={"security"="is_granted('ROLE_USER')"}
+ *     },
+ *     itemOperations={
+ *         "get",
+ *         "put"={"security"="is_granted('edit', object)"},
+ *         "delete"={"security"="is_granted('delete', object)"}
+ *     }
  * )
  * @ORM\Entity(repositoryClass=RoomRepository::class)
  */
@@ -115,6 +124,18 @@ class Room
      * @Groups("room:read")
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Groups("room:read")
+     */
+    private $isPublished;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("room:read")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -297,6 +318,30 @@ class Room
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(?bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
