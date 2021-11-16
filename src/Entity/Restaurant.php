@@ -53,6 +53,20 @@ class Restaurant
     /**
      * @ORM\Column(type="string", length=255)
      * 
+     * @Groups({"room:read", "room:write"})
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"room:read", "room:write"})
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
      * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $namePlat;
@@ -156,8 +170,6 @@ class Restaurant
         $this->comments = new ArrayCollection();
     }
 
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -183,6 +195,30 @@ class Restaurant
     public function setDescriptif(string $descriptif): self
     {
         $this->descriptif = $descriptif;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

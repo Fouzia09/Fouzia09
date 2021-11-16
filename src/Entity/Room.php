@@ -32,7 +32,7 @@ class Room
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * 
-     * @Groups("room:read", "user: read")
+     * @Groups("room:read", "user:read")
      */
     private $id;
 
@@ -49,6 +49,20 @@ class Room
      * @Groups({"room:read", "room:write"})
      */
     private $descriptif;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"room:read", "room:write"})
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"room:read", "room:write"})
+     */
+    private $city;
 
     /**
      * @ORM\Column(type="float")
@@ -148,14 +162,26 @@ class Room
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getCountry(): ?string
     {
-        return $this->name;
+        return $this->country;
     }
 
-    public function setName(string $name): self
+    public function setCountry(string $country): self
     {
-        $this->name = $name;
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
@@ -168,6 +194,18 @@ class Room
     public function setDescriptif(string $descriptif): self
     {
         $this->descriptif = $descriptif;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
