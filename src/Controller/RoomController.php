@@ -38,9 +38,9 @@ class RoomController extends AbstractController
         $rooms = $this->roomService->findByFilter($type, $value);
 
 		if (sizeof($rooms) > 0) {
-			return $this->json($rooms, 200, [], ['groups' => ['room:read']]);
+			return $this->json($rooms, Response::HTTP_OK, [], ['groups' => ['room:read']]);
 		} else {
-			return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found'], 200);
+			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 200);
 		}
 	}
 

@@ -38,7 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="json")
      * 
-     * @Groups("user:read")
+     * @Groups({"user:read", "user:write"})
+     * 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_HOTELIER', 'ROLE_CHEF'
      */
     private $roles = [];
 
@@ -154,7 +155,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        //$roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
