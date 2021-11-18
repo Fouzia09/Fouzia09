@@ -29,8 +29,8 @@ class RestaurantService
 
         $restaurants[] = [];
 
-        if ($type == 'squarFeet') {
-            $restaurants = $this->restaurantRepository->findBySquarFeet($value);
+        if ($type == 'rangePrice') {
+            $restaurants = $this->restaurantRepository->findByRangePrice($value);
         } else {
             $restaurants = $this->restaurantRepository->findByType($type, $value);
         }

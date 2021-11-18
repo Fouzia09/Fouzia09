@@ -53,14 +53,14 @@ class Restaurant
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"room:read", "room:write"})
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"room:read", "room:write"})
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $city;
 

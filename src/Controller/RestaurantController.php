@@ -27,7 +27,7 @@ class RestaurantController extends AbstractController
     }
 
     /**
-     * @Route("/filter/{type}/{value}", name="filter")
+     * @Route("/filter/{type}/{value}", name="show")
      * @param string $type
      * @param string $value
      * 
