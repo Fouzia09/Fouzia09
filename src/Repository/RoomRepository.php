@@ -19,6 +19,44 @@ class RoomRepository extends ServiceEntityRepository
         parent::__construct($registry, Room::class);
     }
 
+    /**
+     * @param string $type
+     * @param string $value
+     * 
+     * @return Room[]
+     */
+    public function findByType($type, $value)
+    {
+        $property = "r.{$type}";
+        
+        return $this->createQueryBuilder('r')
+            ->andWhere("{$property} = :val")
+            ->setParameter('val', $value)
+            ->orderBy('r.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @param string $value
+     * 
+     * @return Room[]
+     */
+    public function findBySquarFeet($value)
+    {
+        list($min, $max) = explode('-', $value);
+
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.squarFeet BETWEEN :min AND :max')
+            ->setParameter('min', $min)
+            ->setParameter('max', $max)
+            ->orderBy('r.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Room[] Returns an array of Room objects
     //  */

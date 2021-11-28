@@ -4,7 +4,7 @@
 
 namespace App\DataPersister;
 
-use App\Entity\Restaurant;
+use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -14,7 +14,7 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 /**
  *
  */
-class RestaurantDataPersister implements ContextAwareDataPersisterInterface
+class CommentDataPersister implements ContextAwareDataPersisterInterface
 {
     /**
      * @var EntityManagerInterface
@@ -44,31 +44,23 @@ class RestaurantDataPersister implements ContextAwareDataPersisterInterface
      */
     public function supports($data, array $context = []): bool
     {
-        return $data instanceof Restaurant;
+        return $data instanceof Comment;
     }
 
     /**
-     * @param Restaurant $data
+     * @param Comment $data
      */
     public function persist($data, array $context = [])
     {
-        // Update the slug only if the restaurant isn't published
-        if (!$data->getIsPublished()) {
-            $data->setSlug(
-                $this
-                    ->_slugger
-                    ->slug(strtolower($data->getName())). '-' .uniqid()
-            );
-        }
 
-        // Set the author if it's a new restaurant
-        if ($this->_request->getMethod() === 'POST') {
+        // Set the author if it's a new comment
+        /* if ($this->_request->getMethod() === 'POST') {
             $data->setAuthor($this->_security->getUser());
-        }
+        } */
 
-        // Set the updatedAt value if it's not a POST request
+        // Set the createdAt value if it's not a POST request
         if ($this->_request->getMethod() !== 'POST') {
-            $data->setUpdatedAt(new \DateTime());
+            $data->setCreatedAt(new \DateTime());
         }
 
         $this->_entityManager->persist($data);

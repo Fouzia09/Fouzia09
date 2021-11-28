@@ -10,7 +10,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"comment:read"}},
- *      denormalizationContext={"groups"={"comment:write"}}
+ *      denormalizationContext={"groups"={"comment:write"}},
+ *      collectionOperations={
+ *         "get",
+ *         "post"={"security"="is_granted('ROLE_USER')"}
+ *     },
+ *     itemOperations={
+ *         "get",
+ *         "put"={"security"="is_granted('edit', object)"},
+ *         "delete"={"security"="is_granted('delete', object)"}
+ *     }
  * )
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
