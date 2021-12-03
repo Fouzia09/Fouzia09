@@ -40,7 +40,7 @@ class RoomController extends AbstractController
 		if (sizeof($rooms) > 0) {
 			return $this->json($rooms, Response::HTTP_OK, [], ['groups' => ['room:read']]);
 		} else {
-			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 200);
+			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found']);
 		}
 	}
 
