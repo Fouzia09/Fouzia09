@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      denormalizationContext={"groups"={"restaurant:write"}},
  *      collectionOperations={
  *         "get",
- *         "post"={"security"="is_granted('ROLE_USER')"}
+ *         "post"={"security"="is_granted('ROLE_CHEF')"}
  *     },
  *     itemOperations={
  *         "get",
@@ -27,7 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * )
  * @ApiFilter(SearchFilter::class, properties={
  *      "id": "exact",
- *      "price": "exact",
+ *      "city": "exact",
  *      "name": "partial"
  *     
  *     
@@ -158,7 +158,7 @@ class Restaurant
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="restaurants")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("restaurant:read")
+     * @Groups("room:read")
      */
     private $author;
 

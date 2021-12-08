@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      denormalizationContext={"groups"={"room:write"}},
  *      collectionOperations={
  *         "get",
- *         "post"={"security"="is_granted('ROLE_USER')"}
+ *         "post"={"security"="is_granted('ROLE_HOTELIER')"}
  *     },
  *     itemOperations={
  *         "get",

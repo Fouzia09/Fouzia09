@@ -29,14 +29,29 @@ class RestaurantService
 
         $restaurants[] = [];
 
-        if ($type == 'rangePrice') {
-            $restaurants = $this->restaurantRepository->findByRangePrice($value);
-        } else {
+        {
             $restaurants = $this->restaurantRepository->findByType($type, $value);
         }
 
         return $restaurants;
     }
 
+        /**
+     * Tout les restaurants en fonction du filtre
+     * @param string $type
+     * @param string $value
+     * 
+     * @return Restaurant[]
+     */
+    public function findByFilterPrice( string $value): array {
+
+        $restaurants[] = [];
+
+        {
+            $restaurants = $this->restaurantRepository->findByRangePrice($value);
+        }
+
+        return $restaurants;
+    }
 
 }

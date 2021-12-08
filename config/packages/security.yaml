@@ -40,4 +40,10 @@ security:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/users, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/rooms, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/api/restaurants, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/restaurants, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_CHEF, ROLE_HOTELIER]
+        ROLE_CHEF: ROLE_USER
+        ROLE_HOTELIER: ROLE_USER
+      
