@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"favorite:read"}},
- *      denormalizationContext={"groups"={"favorite:write"}}
+ *      denormalizationContext={"groups"={"favorite:write"}},
  *      collectionOperations={
  *         "get",
  *         "post"={"security"="is_granted('ROLE_USER')"}
