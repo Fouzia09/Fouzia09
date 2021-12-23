@@ -7,13 +7,13 @@ use App\Repository\RestaurantRepository;
 
 class RestaurantService 
 {
-    private RestaurantRepository $RestaurantRepository;
+    //private RestaurantRepository $RestaurantRepository;
 
     /**
      * RestaurantService constructor.
      * @param RestaurantRepository $restaurantRepository
      */
-	public function __construct(RestaurantRepository $restaurantRepository)
+    public function __construct(RestaurantRepository $restaurantRepository)
     {
         $this->restaurantRepository = $restaurantRepository;
     }

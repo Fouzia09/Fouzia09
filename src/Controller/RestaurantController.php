@@ -15,13 +15,13 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class RestaurantController extends AbstractController
 {
-    private RestaurantService $restaurantService;
+    //private RestaurantService $restaurantService
 
     /**
      * RestaurantController constructor.
      * @param RestaurantService $restaurantService
      */
-	public function __construct(RestaurantService $restaurantService)
+    public function __construct(RestaurantService $restaurantService)
     {
         $this->restaurantService = $restaurantService;
     }
@@ -33,17 +33,17 @@ class RestaurantController extends AbstractController
      * 
      * @return Response
      */
-	public function filter(string $type, string $value): Response
-	{
+    public function filter(string $type, string $value): Response
+    {
         $restaurants = $this->restaurantService->findByFilter($type, $value);
       
 
-		if (sizeof($restaurants) > 0) {
-			return $this->json($restaurants, 200, [], ['groups' => ['restaurant:read']]);
-		} else {
-			return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found']);
-		}
-	}
+        if (sizeof($restaurants) > 0) {
+            return $this->json($restaurants, 200, [], ['groups' => ['restaurant:read']]);
+        } else {
+            return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found']);
+        }
+    }
     /**
      * @Route("/filter/{value}", name="showPrice")
      * 
@@ -52,15 +52,15 @@ class RestaurantController extends AbstractController
      * @return Response
      */
     public function filterPrice( string $value): Response
-	{
+    {
         $restaurants = $this->restaurantService->findByFilterPrice($value);
       
 
-		if (sizeof($restaurants) > 0) {
-			return $this->json($restaurants, 200, [], ['groups' => ['restaurant:read']]);
-		} else {
-			return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found']);
-		}
-	}
+        if (sizeof($restaurants) > 0) {
+            return $this->json($restaurants, 200, [], ['groups' => ['restaurant:read']]);
+        } else {
+            return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found']);
+        }
+    }
 
 }
