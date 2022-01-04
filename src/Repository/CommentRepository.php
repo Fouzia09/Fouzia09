@@ -19,6 +19,25 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    /**
+     * @param string $page "room" ou "restaurant"
+     * @param string $pageId id de la page
+     * 
+     * @return CommentOUT[]
+     */
+    public function findByPage($page, $pageId)
+    {
+        $property = "c.{$page}";
+        
+        return $this->createQueryBuilder('c')
+            ->andWhere("{$property} = :val")
+            ->setParameter('val', $pageId)
+            ->orderBy('c.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */
