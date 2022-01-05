@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class RestaurantController extends AbstractController
 {
-    //private RestaurantService $restaurantService
+    //private RestaurantService $restaurantService;
 
     /**
      * RestaurantController constructor.

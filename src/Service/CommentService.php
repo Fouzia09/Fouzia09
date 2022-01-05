@@ -7,7 +7,7 @@ use App\Repository\CommentRepository;
 
 class CommentService 
 {
-    private CommentRepository $commentRepository;
+    //private CommentRepository $commentRepository;
 
     /**
      * CommentService constructor.

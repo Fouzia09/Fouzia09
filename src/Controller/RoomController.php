@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class RoomController extends AbstractController
 {
-    private RoomService $roomService;
+    //private RoomService $roomService;
 
     /**
      * RoomController constructor.

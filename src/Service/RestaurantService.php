@@ -7,7 +7,7 @@ use App\Repository\RestaurantRepository;
 
 class RestaurantService 
 {
-    private RestaurantRepository $RestaurantRepository;
+    //private RestaurantRepository $RestaurantRepository;
 
     /**
      * RestaurantService constructor.

@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class CommentController extends AbstractController
 {
-    private CommentService $commentService;
+    //private CommentService $commentService;
 
     /**
      * CommentController constructor.
