@@ -18,7 +18,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={
  *         "get",
  *         "put"={"security"="is_granted('edit', object)"},
- *         "delete"={"security"="is_granted('delete', object)"}
+ *         "delete"={"security"="is_granted('delete', object)"},
+ *         "patch"
  *     }
  * )
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -57,21 +58,21 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups("comment:write")
      */
     private $restaurant;
 
     /**
      * @ORM\ManyToOne(targetEntity=Room::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups("comment:write")
      */
     private $room;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
