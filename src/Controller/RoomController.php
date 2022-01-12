@@ -26,6 +26,18 @@ class RoomController extends AbstractController
         $this->roomService = $roomService;
     }
 
+        /**
+     * @Route("/", name="question_index", methods={"GET"})
+     */
+    public function getAll(RoomRepository $roomRepository): Response
+    {
+        $rooms = $roomRepository->findAll();
+        if(sizeof($rooms) == 0){
+            return $this-> json(['status'=> Response::HTTP_NOT_FOUND, 'message'=> 'No question found '] , 404, []);
+        }
+        return  $this->json($rooms, 200, [], ['groups'=>["groups","room:read"]]);
+    }
+
     /**
      * @Route("/filter/{type}/{value}", name="filter")
      * @param string $type
