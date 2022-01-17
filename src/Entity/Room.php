@@ -20,7 +20,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={
  *         "get",
  *         "put"={"security"="is_granted('edit', object)"},
- *         "delete"={"security"="is_granted('delete', object)"}
+ *         "delete"={"security"="is_granted('delete', object)"},
+ *         "patch"
  *     }
  * )
  * @ORM\Entity(repositoryClass=RoomRepository::class)
