@@ -131,13 +131,6 @@ class Restaurant
     private $descriptifPlat3;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * 
-     * @Groups({"restaurant:read", "restaurant:write"})
-     */
-    private $rangePrice;
-
-    /**
      * @ORM\Column(type="string", length=255, unique=true)
      * 
      * @Groups("restaurant:read")
@@ -173,6 +166,20 @@ class Restaurant
      * @Groups("restaurant:read")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="smallint")
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
+     */
+    private $rangePrice2;
+
+    /**
+     * @ORM\Column(type="smallint")
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
+     */
+    private $rangePrice1;
 
     public function __construct()
     {
@@ -329,18 +336,6 @@ class Restaurant
         return $this;
     }
 
-    public function getRangePrice(): ?string
-    {
-        return $this->rangePrice;
-    }
-
-    public function setRangePrice(?string $rangePrice): self
-    {
-        $this->rangePrice = $rangePrice;
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -427,6 +422,30 @@ class Restaurant
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getRangePrice2(): ?int
+    {
+        return $this->rangePrice2;
+    }
+
+    public function setRangePrice2(int $rangePrice2): self
+    {
+        $this->rangePrice2 = $rangePrice2;
+
+        return $this;
+    }
+
+    public function getRangePrice1(): ?int
+    {
+        return $this->rangePrice1;
+    }
+
+    public function setRangePrice1(int $rangePrice1): self
+    {
+        $this->rangePrice1 = $rangePrice1;
 
         return $this;
     }
