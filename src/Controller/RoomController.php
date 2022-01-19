@@ -56,6 +56,24 @@ class RoomController extends AbstractController
 		}
 	}
 
+
+    /**
+     * @Route("/filter/{value}", name="filter")
+     * @param string $value
+     * 
+     * @return Response
+     */
+	public function filterValue(string $value): Response
+	{
+        $rooms = $this->roomService->findByValue($value);
+
+		if (sizeof($rooms) > 0) {
+			return $this->json($rooms, Response::HTTP_OK, [], ['groups' => ['room:read']]);
+		} else {
+			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 200);
+		}
+	}
+
     // /**
     //  * @Route("/filter", name="filter")
     //  * @param string $value

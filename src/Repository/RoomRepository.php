@@ -57,14 +57,14 @@ class RoomRepository extends ServiceEntityRepository
         ;
     }
 
-    // /**
-    //  * @return Room[] Returns an array of Room objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+    * @return Room[] Returns an array of Room objects
+    */
+    
+    public function findByValue($value)
     {
         return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
+            ->andWhere('h.price = :val')
             ->setParameter('val', $value)
             ->orderBy('h.id', 'ASC')
             ->setMaxResults(10)
@@ -72,7 +72,7 @@ class RoomRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Room

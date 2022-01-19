@@ -38,6 +38,20 @@ class RoomService
         return $rooms;
     }
 
+        /**
+     * Toutes les chambres en fonction du filtre
+     * @param string $type
+     * @param string $value
+     * 
+     * @return Room[]
+     */
+    public function findByValue(string $value): array {
+
+        $rooms[] = [];
+            $rooms = $this->roomRepository->findByValue($value);
+        return $rooms;
+    }
+
     // /**
     //  * Toutes les chambres en fonction du filtre
     //  * @param Filter[] $filter
