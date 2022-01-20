@@ -19,6 +19,21 @@ class FavoriteRepository extends ServiceEntityRepository
         parent::__construct($registry, Favorite::class);
     }
 
+    /**
+     * @param int $userId
+     * 
+     * @return Favorite[]
+     */
+    public function findByUser($userId)
+    { 
+        return $this->createQueryBuilder('f')
+            ->andWhere("f.users = :val")
+            ->setParameter('val', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Favorite[] Returns an array of Favorite objects
     //  */

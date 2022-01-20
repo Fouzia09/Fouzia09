@@ -23,7 +23,7 @@ class CommentRepository extends ServiceEntityRepository
      * @param string $page "room" ou "restaurant"
      * @param string $pageId id de la page
      * 
-     * @return CommentOUT[]
+     * @return Comment[]
      */
     public function findByPage($page, $pageId)
     {

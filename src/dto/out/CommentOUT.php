@@ -23,6 +23,16 @@ class CommentOUT {
      */
     private $createdAt;
 
+    /**
+     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
+     */
+    private $restaurantId;
+
+    /**
+     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
+     */
+    private $roomId;
+
     public function __construct(int $id, string $author, string $content, \DateTimeInterface $createdAt) {
         $this->id = $id;
         $this->author = $author;

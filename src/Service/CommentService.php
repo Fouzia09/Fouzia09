@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use Doctrine\DBAL\Driver\Connection;
+use App\dto\out\CommentOUT;
 use App\Repository\CommentRepository;
 
 class CommentService 
@@ -26,11 +26,15 @@ class CommentService
      * @return CommentOUT[]
      */
     public function findByPage(string $page, int $pageId): array {
-
-        $comments[] = [];
-
+        $commentsToSend[] = [];
         $comments = $this->commentRepository->findByPage($page, $pageId);
 
-        return $comments;
+        foreach ($comments as $comment) {
+            $commentToSend = 
+                new CommentOUT($comment->id, $comment->author, $comment->content, $comment->createdAt);
+            array_push($commentsToSend, $commentToSend);
+        }
+
+        return $commentsToSend;
     }
 }
