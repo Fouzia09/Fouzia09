@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class FavoriteController extends AbstractController
 {
-    private FavoriteService $favoriteService;
+    //private FavoriteService $favoriteService;
 
     /**
      * FavoriteController constructor.
