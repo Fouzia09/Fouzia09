@@ -8,7 +8,7 @@ use App\Repository\FavoriteRepository;
 
 class FavoriteService 
 {
-    private FavoriteRepository $favoriteRepository;
+    //private FavoriteRepository $favoriteRepository;
 
     /**
      * FavoriteService constructor.
