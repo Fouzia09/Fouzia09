@@ -101,6 +101,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Room::class, mappedBy="author")
+     * 
+     * @Groups("user:read")
      */
     private $rooms;
 

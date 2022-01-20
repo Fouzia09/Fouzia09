@@ -26,12 +26,23 @@ class CommentService
      * @return CommentOUT[]
      */
     public function findByPage(string $page, int $pageId): array {
-        $commentsToSend[] = [];
+        $commentsToSend = [];
         $comments = $this->commentRepository->findByPage($page, $pageId);
 
         foreach ($comments as $comment) {
             $commentToSend = 
-                new CommentOUT($comment->id, $comment->author, $comment->content, $comment->createdAt);
+                new CommentOUT(
+                    $comment->getId(),
+                    $comment->getAuthor(),
+                    $comment->getContent(),
+                    $comment->getCreatedAt()
+                );
+
+            if ($comment->getRestaurant() != null)
+                $commentToSend->setRestaurantId($comment->getRestaurant()->getId());
+            elseif ($comment->getRoom() != null)
+                $commentToSend->setRoomId($comment->getRoom()->getId());
+                
             array_push($commentsToSend, $commentToSend);
         }
 

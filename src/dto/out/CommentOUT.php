@@ -2,38 +2,40 @@
 
 namespace App\dto\out;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 class CommentOUT {
     /**
-     * @Groups({"comment:read", "restaurant:read", "room:read"})
+     * @Groups("comment:read")
      */
     private $id;
 
     /**
-     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
+     * @Groups("comment:read")
      */
     private $author;
 
     /**
-     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
+     * @Groups("comment:read")
      */
     private $content;
 
     /**
-     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
+     * @Groups("comment:read")
      */
     private $createdAt;
 
     /**
-     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
+     * @Groups("comment:read")
      */
     private $restaurantId;
 
     /**
-     * @Groups({"comment:read", "comment:write", "restaurant:read", "room:read"})
+     * @Groups("comment:read")
      */
     private $roomId;
 
-    public function __construct(int $id, string $author, string $content, \DateTimeInterface $createdAt) {
+    public function __construct(int $id, string $author, string $content, \DateTimeInterface $createdAt ) {
         $this->id = $id;
         $this->author = $author;
         $this->content = $content;
@@ -84,6 +86,30 @@ class CommentOUT {
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getRestaurantId(): ?int
+    {
+        return $this->restaurantId;
+    }
+
+    public function setRestaurantId(int $restaurantId): self
+    {
+        $this->restaurantId = $restaurantId;
+
+        return $this;
+    }
+
+    public function getRoomId(): ?int
+    {
+        return $this->roomId;
+    }
+
+    public function setRoomId(int $roomId): self
+    {
+        $this->roomId = $roomId;
 
         return $this;
     }

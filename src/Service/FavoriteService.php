@@ -21,8 +21,7 @@ class FavoriteService
 
     /**
      * Tous les favoris d'un utilisateur
-     * @param string $page "room" ou "restaurant"
-     * @param int $pageId id de la page
+     * @param int $userId id de l'utilisateur
      * 
      * @return FavoriteOUT[]
      */
