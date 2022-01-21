@@ -8,7 +8,7 @@ use App\Repository\UserRepository;
 
 class UserService 
 {
-    private UserRepository $userRepository;
+    //private UserRepository $userRepository;
 
     /**
      * UserService constructor.

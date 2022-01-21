@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class UserController extends AbstractController
 {
-    private UserService $userService;
+    //private UserService $userService;
 
     /**
      * UserController constructor.

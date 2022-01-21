@@ -182,6 +182,21 @@ class Restaurant
      */
     private $rangePrice1;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="integer")
+     * 
+     * @Groups({"restaurant:read", "restaurant:write"})
+     */
+    private $zipcode;
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -450,5 +465,30 @@ class Restaurant
 
         return $this;
     }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?int
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(int $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
 
 }
