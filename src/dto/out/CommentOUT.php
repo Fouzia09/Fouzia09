@@ -35,7 +35,12 @@ class CommentOUT {
      */
     private $roomId;
 
-    public function __construct(int $id, string $author, string $content, \DateTimeInterface $createdAt ) {
+    /**
+     * @Groups("comment:read")
+     */
+    private $userId;
+
+    public function __construct(int $id, string $author, string $content, \DateTimeInterface $createdAt) {
         $this->id = $id;
         $this->author = $author;
         $this->content = $content;
@@ -110,6 +115,18 @@ class CommentOUT {
     public function setRoomId(int $roomId): self
     {
         $this->roomId = $roomId;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }

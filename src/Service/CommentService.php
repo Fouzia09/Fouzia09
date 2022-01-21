@@ -42,6 +42,9 @@ class CommentService
                 $commentToSend->setRestaurantId($comment->getRestaurant()->getId());
             elseif ($comment->getRoom() != null)
                 $commentToSend->setRoomId($comment->getRoom()->getId());
+
+            if ($comment->getUser() != null)
+                $commentToSend->setUserId($comment->getUser()->getId());
                 
             array_push($commentsToSend, $commentToSend);
         }
