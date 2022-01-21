@@ -152,6 +152,20 @@ class Room
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({"room:read", "room:write"})
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="integer")
+     * 
+     * @Groups({"room:read", "room:write"})
+     */
+    private $zipcode;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -381,6 +395,30 @@ class Room
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?int
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(int $zipcode): self
+    {
+        $this->zipcode = $zipcode;
 
         return $this;
     }
