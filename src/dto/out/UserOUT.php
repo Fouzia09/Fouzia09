@@ -4,7 +4,6 @@ namespace App\dto\out;
 
 use App\Entity\Comment;
 use App\Entity\Favorite;
-use App\Entity\Restaurant;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -194,14 +193,14 @@ class UserOUT {
     }
 
     /**
-     * @return Collection|Restaurant[]
+     * @return Collection|RestaurantOUT[]
      */
     public function getRestaurants(): Collection
     {
         return $this->restaurants;
     }
 
-    public function addRestaurant(Restaurant $restaurant): self
+    public function addRestaurant(RestaurantOUT $restaurant): self
     {
         if (!$this->restaurants->contains($restaurant)) {
             $this->restaurants[] = $restaurant;

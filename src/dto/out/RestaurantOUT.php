@@ -4,89 +4,109 @@ namespace App\dto\out;
 
 use Symfony\Component\Serializer\Annotation\Groups;
 
-class RoomOUT {
+class RestaurantOUT {
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $id;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $name;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $description;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $country;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $city;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
+     */
+    private $dishName;
+
+    /**
+     * @Groups({"restaurant:read", "user:read"})
+     */
+    private $dishDescription;
+
+    /**
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $price;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $image1;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $image2;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $image3;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
-    private $createdAt;
+    private $dishDescription2;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
-    private $isKingSize;
+    private $dishDescription3;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
-    private $nbBed;
+    private $rangePrice1;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
-    private $squarFeet;
+    private $rangePrice2;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
+     */
+    private $address;
+
+    /**
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $zipCode;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
+     */
+    private $createdAt;
+
+    /**
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $isPublished;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $updatedAt;
 
     /**
-     * @Groups({"room:read", "user:read"})
+     * @Groups({"restaurant:read", "user:read"})
      */
     private $slug;
 
@@ -96,15 +116,19 @@ class RoomOUT {
         string $description,
         string $country,
         string $city,
+        string $dishName,
         float $price,
         string $image1,
         ?string $image2,
         ?string $image3,
         \DateTime $createdAt,
-        bool $isKingSize,
-        int $nbBed,
-        int $squarFeet,
-        int $zipCode,
+        string $dishDescription,
+        ?string $dishDescription2,
+        ?string $dishDescription3,
+        int $rangePrice1,
+        int $rangePrice2,
+        ?string $address,
+        ?int $zipCode,
         ?bool $isPublished,
         ?\DateTime $updatedAt,
         string $slug
@@ -114,15 +138,19 @@ class RoomOUT {
         $this->description = $description;
         $this->country = $country;
         $this->city = $city;
+        $this->dishName = $dishName;
+        $this->dishDescription = $dishDescription;
         $this->price = $price;
         $this->image1 = $image1;
         $this->image2 = $image2;
         $this->image3 = $image3;
-        $this->createdAt = $createdAt;
-        $this->isKingSize = $isKingSize;
-        $this->nbBed = $nbBed;
-        $this->squarFeet = $squarFeet;
+        $this->dishDescription2 = $dishDescription2;
+        $this->dishDescription3 = $dishDescription3;
+        $this->rangePrice1 = $rangePrice1;
+        $this->rangePrice2 = $rangePrice2;
+        $this->address = $address;
         $this->zipCode = $zipCode;
+        $this->createdAt = $createdAt;
         $this->isPublished = $isPublished;
         $this->updatedAt = $updatedAt;
         $this->slug = $slug;
@@ -188,6 +216,30 @@ class RoomOUT {
         return $this;
     }
 
+    public function getDishName(): ?string
+    {
+        return $this->dishName;
+    }
+
+    public function setDishName(string $dishName): self
+    {
+        $this->dishName = $dishName;
+
+        return $this;
+    }
+
+    public function getDishDescription(): ?string
+    {
+        return $this->dishDescription;
+    }
+
+    public function setDishDescription(string $dishDescription): self
+    {
+        $this->dishDescription = $dishDescription;
+
+        return $this;
+    }
+
     public function getPrice(): ?float
     {
         return $this->price;
@@ -236,50 +288,62 @@ class RoomOUT {
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getDishDescription2(): ?string
     {
-        return $this->createdAt;
+        return $this->dishDescription2;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setDishDescription2(string $dishDescription2): self
     {
-        $this->createdAt = $createdAt;
+        $this->dishDescription2 = $dishDescription2;
 
         return $this;
     }
 
-    public function getIsKingSize(): ?bool
+    public function getDishDescription3(): ?string
     {
-        return $this->isKingSize;
+        return $this->dishDescription3;
     }
 
-    public function setIsKingSize(bool $isKingSize): self
+    public function setDishDescription3(string $dishDescription3): self
     {
-        $this->isKingSize = $isKingSize;
+        $this->dishDescription3 = $dishDescription3;
 
         return $this;
     }
 
-    public function getNbBed(): ?int
+    public function getRangePrice1(): ?int
     {
-        return $this->nbBed;
+        return $this->rangePrice1;
     }
 
-    public function setNbBed(int $nbBed): self
+    public function setRangePrice1(int $rangePrice1): self
     {
-        $this->nbBed = $nbBed;
+        $this->rangePrice1 = $rangePrice1;
 
         return $this;
     }
 
-    public function getSquarFeet(): ?int
+    public function getRangePrice2(): ?int
     {
-        return $this->squarFeet;
+        return $this->rangePrice2;
     }
 
-    public function setSquarFeet(int $squarFeet): self
+    public function setRangePrice2(int $rangePrice2): self
     {
-        $this->squarFeet = $squarFeet;
+        $this->rangePrice2 = $rangePrice2;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
@@ -292,6 +356,18 @@ class RoomOUT {
     public function setZipCode(int $zipCode): self
     {
         $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

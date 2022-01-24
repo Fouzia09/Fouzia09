@@ -2,9 +2,9 @@
 
 namespace App\Service;
 
+use App\dto\out\RestaurantOUT;
 use App\dto\out\RoomOUT;
 use App\dto\out\UserOUT;
-use Doctrine\DBAL\Driver\Connection;
 use App\Repository\UserRepository;
 
 class UserService 
@@ -54,7 +54,12 @@ class UserService
             }
             if (count($u->getRestaurants()) > 0)
             {
-                foreach ($u->getRestaurants() as $restaurant) {
+                foreach ($u->getRestaurants() as $r) {
+                    $restaurant = new RestaurantOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(), $r->getCity(),
+                        $r->getNamePlat(), $r->getDescriptifPlat(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(),
+                        $r->getDescriptifPlat2(), $r->getDescriptifPlat3(), $r->getRangePrice1(), $r->getRangePrice2(),
+                        $r->getAddress(), $r->getZipcode(), $r->getCreatedAt(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
+
                     $userToSend->addRestaurant($restaurant);
                 }
             }
@@ -64,7 +69,7 @@ class UserService
                     $room = new RoomOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(),
                         $r->getCity(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(),
                         $r->getCreatedAt(), $r->getIsKingSize(), $r->getNbBed(), $r->getSquarFeet(),
-                        $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
+                        $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
 
                     $userToSend->addRoom($room);
                 }
