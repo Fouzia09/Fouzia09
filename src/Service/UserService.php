@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\dto\out\CommentOUT;
+use App\dto\out\FavoriteOUT;
 use App\dto\out\RestaurantOUT;
 use App\dto\out\RoomOUT;
 use App\dto\out\UserOUT;
@@ -42,13 +44,17 @@ class UserService
 
             if (count($u->getFavorites()) > 0)
             {
-                foreach ($u->getFavorites() as $favorite) {
+                foreach ($u->getFavorites() as $f) {
+                    $favorite = new FavoriteOUT($f->getId(), $f->getItemName(), $f->getItemUrl(), $f->getItemImage());
+
                     $userToSend->addFavorite($favorite);
                 }
             }
             if (count($u->getComments()) > 0)
             {
-                foreach ($u->getComments() as $comment) {
+                foreach ($u->getComments() as $c) {
+                    $comment = new CommentOUT($c->getId(), $c->getAuthor(), $c->getContent(), $c->getCreatedAt());
+
                     $userToSend->addComment($comment);
                 }
             }

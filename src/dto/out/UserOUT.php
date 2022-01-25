@@ -159,14 +159,14 @@ class UserOUT {
     }
 
     /**
-     * @return Collection|Favorite[]
+     * @return Collection|FavoriteOUT[]
      */
     public function getFavorites(): Collection
     {
         return $this->favorites;
     }
 
-    public function addFavorite(Favorite $favorite): self
+    public function addFavorite(FavoriteOUT $favorite): self
     {
         if (!$this->favorites->contains($favorite)) {
             $this->favorites[] = $favorite;
@@ -176,14 +176,14 @@ class UserOUT {
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection|CommentOUT[]
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    public function addComment(Comment $comment): self
+    public function addComment(CommentOUT $comment): self
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
