@@ -74,7 +74,7 @@ class UserService
                 foreach ($u->getRooms() as $r) {
                     $room = new RoomOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(),
                         $r->getCity(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(),
-                        $r->getCreatedAt(), $r->getIsKingSize(), $r->getNbBed(), $r->getSquarFeet(),
+                        $r->getCreatedAt(), $r->getIsKingSize(), $r->getNbBed(), $r->getSquarFeet(), $r->getAddress(),
                         $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
 
                     $userToSend->addRoom($room);

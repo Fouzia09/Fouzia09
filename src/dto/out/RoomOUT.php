@@ -73,6 +73,11 @@ class RoomOUT {
     /**
      * @Groups({"room:read", "user:read"})
      */
+    private $address;
+
+    /**
+     * @Groups({"room:read", "user:read"})
+     */
     private $zipCode;
 
     /**
@@ -104,6 +109,7 @@ class RoomOUT {
         bool $isKingSize,
         int $nbBed,
         int $squarFeet,
+        ?string $address,
         int $zipCode,
         ?bool $isPublished,
         ?\DateTime $updatedAt,
@@ -122,6 +128,7 @@ class RoomOUT {
         $this->isKingSize = $isKingSize;
         $this->nbBed = $nbBed;
         $this->squarFeet = $squarFeet;
+        $this->address = $address;
         $this->zipCode = $zipCode;
         $this->isPublished = $isPublished;
         $this->updatedAt = $updatedAt;
@@ -280,6 +287,18 @@ class RoomOUT {
     public function setSquarFeet(int $squarFeet): self
     {
         $this->squarFeet = $squarFeet;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
