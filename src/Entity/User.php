@@ -15,7 +15,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
  *      normalizationContext={"groups"={"user:read"}},
- *      denormalizationContext={"groups"={"user:write"}}
+ *      denormalizationContext={"groups"={"user:write"}},
+ *      collectionOperations={
+ *          "get",
+ *          "post",
+ *          "collectionName_api_me"={"route_name"="api_me"}
+ *     },
  * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface

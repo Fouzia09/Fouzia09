@@ -5,3 +5,11 @@
 authentication_token:
     path: /api/login
     methods: ['POST']
+
+api_me:
+    path: '/api/currentuser'
+    methods: ['GET']
+    defaults:
+        _controller: '\App\Controller\CurrentUserController::currentuser'
+        _api_resource_class: 'App\Entity\User'
+        _api_collection_operation_name: 'collectionName_api_me'
