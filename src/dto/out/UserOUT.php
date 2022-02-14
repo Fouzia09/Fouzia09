@@ -159,14 +159,14 @@ class UserOUT {
     }
 
     /**
-     * @return Collection|FavoriteOUT[]
+     * @return Collection|FavoriteOUTFromUserOUT[]
      */
     public function getFavorites(): Collection
     {
         return $this->favorites;
     }
 
-    public function addFavorite(FavoriteOUT $favorite): self
+    public function addFavorite(FavoriteOUTFromUserOUT $favorite): self
     {
         if (!$this->favorites->contains($favorite)) {
             $this->favorites[] = $favorite;

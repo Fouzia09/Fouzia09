@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\dto\out\CommentOUT;
-use App\dto\out\FavoriteOUT;
+use App\dto\out\FavoriteOUTFromUserOUT;
 use App\dto\out\RestaurantOUT;
 use App\dto\out\RoomOUT;
 use App\dto\out\UserOUT;
@@ -33,19 +33,12 @@ class UserService
         $userToSend = "";
         foreach ($user as $u) {
             $userToSend = 
-            new UserOUT(
-                $u->getId(),
-                $u->getName(),
-                $u->getEmail(),
-                $u->getSiret(),
-                $u->getRoles(),
-                $u->getCreatedAt(),
-            );
+            new UserOUT($u->getId(), $u->getName(), $u->getEmail(), $u->getSiret(), $u->getRoles(), $u->getCreatedAt());
 
             if (count($u->getFavorites()) > 0)
             {
                 foreach ($u->getFavorites() as $f) {
-                    $favorite = new FavoriteOUT($f->getId(), $f->getItemName(), $f->getItemUrl(), $f->getItemImage());
+                    $favorite = new FavoriteOUTFromUserOUT($f->getId(), $f->getItemName(), $f->getItemUrl(), $f->getItemImage());
 
                     $userToSend->addFavorite($favorite);
                 }
@@ -62,9 +55,9 @@ class UserService
             {
                 foreach ($u->getRestaurants() as $r) {
                     $restaurant = new RestaurantOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(), $r->getCity(),
-                        $r->getNamePlat(), $r->getDescriptifPlat(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(),
-                        $r->getDescriptifPlat2(), $r->getDescriptifPlat3(), $r->getRangePrice1(), $r->getRangePrice2(),
-                        $r->getAddress(), $r->getZipcode(), $r->getCreatedAt(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
+                        $r->getNamePlat(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(), $r->getCreatedAt(),
+                        $r->getDescriptifPlat(), $r->getDescriptifPlat2(), $r->getDescriptifPlat3(), $r->getRangePrice1(), $r->getRangePrice2(),
+                        $r->getAddress(), $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
 
                     $userToSend->addRestaurant($restaurant);
                 }

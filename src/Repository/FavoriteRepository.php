@@ -20,15 +20,15 @@ class FavoriteRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param int $userId
+     * @param string $itemUrl
      * 
      * @return Favorite[]
      */
-    public function findByUser($userId)
+    public function findByItemUrl($itemUrl)
     { 
         return $this->createQueryBuilder('f')
-            ->andWhere("f.users = :val")
-            ->setParameter('val', $userId)
+            ->andWhere("f.itemUrl = :val")
+            ->setParameter('val', $itemUrl)
             ->getQuery()
             ->getResult()
         ;

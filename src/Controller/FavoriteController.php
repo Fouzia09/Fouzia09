@@ -27,17 +27,18 @@ class FavoriteController extends AbstractController
     }
 
     /**
-     * @Route("/{userId}", name="findFavorites")
-     * @param int $userId
+     * @Route("/byItemUrl/{itemUrl}", name="findFavorite")
+     * @param string $itemUrl
      * 
      * @return Response
      */
-	public function findByUser(int $userId): Response
+	public function findByUser(string $itemUrl): Response
 	{
-        $favorites = $this->favoriteService->findByUser($userId);
+        $test = "/room/detail/".$itemUrl;
+        $favorite = $this->favoriteService->findByItemUrl($itemUrl);
 
-		if (sizeof($favorites) > 0) {
-			return $this->json($favorites, Response::HTTP_OK, [], ['groups' => ['favorite:read']]);
+		if ($favorite != null) {
+			return $this->json($favorite, Response::HTTP_OK, [], ['groups' => ['favorite:read']]);
 		} else {
 			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 200);
 		}

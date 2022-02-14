@@ -2,24 +2,26 @@
 
 namespace App\dto\out;
 
-class FavoriteOUT {
+use Symfony\Component\Serializer\Annotation\Groups;
+
+class FavoriteOUTFromUserOUT {
     /**
-     * @Groups("favorite:read")
+     * @Groups({"favorite:read", "user:read"})
      */
     private $id;
 
     /**
-     * @Groups({"favorite:read", "favorite:write"})
+     * @Groups({"favorite:read", "user:read"})
      */
     private $itemName;
 
     /**
-     * @Groups({"favorite:read", "favorite:write"})
+     * @Groups({"favorite:read", "user:read"})
      */
     private $itemUrl;
 
     /**
-     * @Groups({"favorite:read", "favorite:write"})
+     * @Groups({"favorite:read", "user:read"})
      */
     private $itemImage;
 

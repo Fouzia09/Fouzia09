@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\dto\out\FavoriteOUT;
+use App\dto\out\FavoriteOUTFromUserOUT;
 use Doctrine\DBAL\Driver\Connection;
 use App\Repository\FavoriteRepository;
 
@@ -20,19 +20,21 @@ class FavoriteService
     }
 
     /**
-     * Tous les favoris d'un utilisateur
-     * @param int $userId id de l'utilisateur
+     * Le favoris possedant l'url de l'item passée en paramètre
+     * Donc l'item en favoris
+     * @param string $itemUrl l'url de l'item
      * 
-     * @return FavoriteOUT[]
+     * @return FavoriteOUTFromUserOUT[]
      */
-    public function findByUser(int $userId): array {
+    public function findByItemUrl(string $itemUrl): array {
 
         $favoritesToSend[] = [];
-        $favorites = $this->favoriteRepository->findByUser($userId);
+        $favorites = $this->favoriteRepository->findByItemUrl($itemUrl);
+        dump($favorites);
 
         foreach ($favorites as $favorite) {
             $favoriteToSend = 
-                new FavoriteOUT($favorite->id, $favorite->itemName, $favorite->itemUrl, $favorite->itemImage);
+                new FavoriteOUTFromUserOUT($favorite->id, $favorite->itemName, $favorite->itemUrl, $favorite->itemImage);
             array_push($favoritesToSend, $favoriteToSend);
         }
 

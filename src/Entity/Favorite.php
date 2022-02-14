@@ -55,7 +55,7 @@ class Favorite
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="favorites")
      * 
-     * @Groups("favorite:read")
+     * @Groups({"favorite:read", "favorite:write"})
      */
     private $users;
 
