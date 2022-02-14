@@ -30,48 +30,50 @@ class UserService
      */
     public function findByUsername(string $username): UserOUT {
         $user = $this->userRepository->findByUsername($username);
-        $userToSend = "";
-        foreach ($user as $u) {
-            $userToSend = 
-            new UserOUT($u->getId(), $u->getName(), $u->getEmail(), $u->getSiret(), $u->getRoles(), $u->getCreatedAt());
 
-            if (count($u->getFavorites()) > 0)
-            {
-                foreach ($u->getFavorites() as $f) {
-                    $favorite = new FavoriteOUTFromUserOUT($f->getId(), $f->getItemName(), $f->getItemUrl(), $f->getItemImage());
+        $userToSend = new UserOUT(
+            $user->getId(), $user->getUsername(), $user->getName(), $user->getEmail(),
+            $user->getSiret(), $user->getRoles(), $user->getCreatedAt()
+        );
 
-                    $userToSend->addFavorite($favorite);
-                }
+        if (count($user->getFavorites()) > 0)
+        {
+            foreach ($user->getFavorites() as $f) {
+                $favorite =
+                new FavoriteOUTFromUserOUT($f->getId(), $f->getItemName(), $f->getItemUrl(), $f->getItemImage());
+
+                $userToSend->addFavorite($favorite);
             }
-            if (count($u->getComments()) > 0)
-            {
-                foreach ($u->getComments() as $c) {
-                    $comment = new CommentOUT($c->getId(), $c->getAuthor(), $c->getContent(), $c->getCreatedAt());
+        }
+        if (count($user->getComments()) > 0)
+        {
+            foreach ($user->getComments() as $c) {
+                $comment = new CommentOUT($c->getId(), $c->getAuthor(), $c->getContent(), $c->getCreatedAt());
 
-                    $userToSend->addComment($comment);
-                }
+                $userToSend->addComment($comment);
             }
-            if (count($u->getRestaurants()) > 0)
-            {
-                foreach ($u->getRestaurants() as $r) {
-                    $restaurant = new RestaurantOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(), $r->getCity(),
-                        $r->getNamePlat(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(), $r->getCreatedAt(),
-                        $r->getDescriptifPlat(), $r->getDescriptifPlat2(), $r->getDescriptifPlat3(), $r->getRangePrice1(), $r->getRangePrice2(),
-                        $r->getAddress(), $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
+        }
+        if (count($user->getRestaurants()) > 0)
+        {
+            foreach ($user->getRestaurants() as $r) {
+                $restaurant = new RestaurantOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(),
+                    $r->getCity(), $r->getNamePlat(), $r->getPrice(), $r->getImage1(), $r->getImage2(),
+                    $r->getImage3(), $r->getCreatedAt(), $r->getDescriptifPlat(), $r->getDescriptifPlat2(),
+                    $r->getDescriptifPlat3(), $r->getRangePrice1(), $r->getRangePrice2(), $r->getAddress(),
+                    $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
 
-                    $userToSend->addRestaurant($restaurant);
-                }
+                $userToSend->addRestaurant($restaurant);
             }
-            if (count($u->getRooms()) > 0)
-            {
-                foreach ($u->getRooms() as $r) {
-                    $room = new RoomOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(),
-                        $r->getCity(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(),
-                        $r->getCreatedAt(), $r->getIsKingSize(), $r->getNbBed(), $r->getSquarFeet(), $r->getAddress(),
-                        $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
+        }
+        if (count($user->getRooms()) > 0)
+        {
+            foreach ($user->getRooms() as $r) {
+                $room = new RoomOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(),
+                    $r->getCity(), $r->getPrice(), $r->getImage1(), $r->getImage2(), $r->getImage3(),
+                    $r->getCreatedAt(), $r->getIsKingSize(), $r->getNbBed(), $r->getSquarFeet(), $r->getAddress(),
+                    $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
 
-                    $userToSend->addRoom($room);
-                }
+                $userToSend->addRoom($room);
             }
         }
         

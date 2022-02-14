@@ -22,7 +22,7 @@ class FavoriteRepository extends ServiceEntityRepository
     /**
      * @param string $itemUrl
      * 
-     * @return Favorite[]
+     * @return Favorite
      */
     public function findByItemUrl($itemUrl)
     { 
@@ -30,7 +30,7 @@ class FavoriteRepository extends ServiceEntityRepository
             ->andWhere("f.itemUrl = :val")
             ->setParameter('val', $itemUrl)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
 

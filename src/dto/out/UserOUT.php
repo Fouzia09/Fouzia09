@@ -17,6 +17,11 @@ class UserOUT {
     /**
      * @Groups("user:read")
      */
+    private $username;
+
+    /**
+     * @Groups("user:read")
+     */
     private $name;
 
     /**
@@ -63,6 +68,7 @@ class UserOUT {
 
     public function __construct(
         int $id,
+        string $username,
         string $name,
         string $email,
         ?string $siret,
@@ -70,6 +76,7 @@ class UserOUT {
         \DateTime $createdAt
         ) {
         $this->id = $id;
+        $this->username = $username;
         $this->name = $name;
         $this->email = $email;
         $this->siret = $siret;
@@ -89,6 +96,18 @@ class UserOUT {
     public function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

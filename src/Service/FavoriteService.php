@@ -2,8 +2,7 @@
 
 namespace App\Service;
 
-use App\dto\out\FavoriteOUTFromUserOUT;
-use Doctrine\DBAL\Driver\Connection;
+use App\dto\out\FavoriteOUT;
 use App\Repository\FavoriteRepository;
 
 class FavoriteService 
@@ -24,20 +23,19 @@ class FavoriteService
      * Donc l'item en favoris
      * @param string $itemUrl l'url de l'item
      * 
-     * @return FavoriteOUTFromUserOUT[]
+     * @return FavoriteOUT
      */
-    public function findByItemUrl(string $itemUrl): array {
+    public function findByItemUrl(string $itemUrl): FavoriteOUT {
+        $favorite = $this->favoriteRepository->findByItemUrl($itemUrl);
 
-        $favoritesToSend[] = [];
-        $favorites = $this->favoriteRepository->findByItemUrl($itemUrl);
-        dump($favorites);
-
-        foreach ($favorites as $favorite) {
-            $favoriteToSend = 
-                new FavoriteOUTFromUserOUT($favorite->id, $favorite->itemName, $favorite->itemUrl, $favorite->itemImage);
-            array_push($favoritesToSend, $favoriteToSend);
+        $favoriteToSend = new FavoriteOUT(
+            $favorite->getId(), $favorite->getItemName(), $favorite->getItemUrl(), $favorite->getItemImage()
+        );
+        
+        foreach ($favorite->getUsers() as $user) {
+            $favoriteToSend->addUser($user->getId());
         }
-
-        return $favoritesToSend;
+        
+        return $favoriteToSend;
     }
 }

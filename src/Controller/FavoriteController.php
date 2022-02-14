@@ -34,7 +34,7 @@ class FavoriteController extends AbstractController
      */
 	public function findByUser(string $itemUrl): Response
 	{
-        $test = "/room/detail/".$itemUrl;
+        $itemUrl = "/".str_replace("_", "/", $itemUrl);
         $favorite = $this->favoriteService->findByItemUrl($itemUrl);
 
 		if ($favorite != null) {
