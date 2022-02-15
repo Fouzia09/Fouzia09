@@ -2,8 +2,6 @@
 
 namespace App\dto\out;
 
-use App\Entity\Comment;
-use App\Entity\Favorite;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -178,14 +176,14 @@ class UserOUT {
     }
 
     /**
-     * @return Collection|FavoriteOUTFromUserOUT[]
+     * @return Collection|FavoriteOUT[]
      */
     public function getFavorites(): Collection
     {
         return $this->favorites;
     }
 
-    public function addFavorite(FavoriteOUTFromUserOUT $favorite): self
+    public function addFavorite(FavoriteOUT $favorite): self
     {
         if (!$this->favorites->contains($favorite)) {
             $this->favorites[] = $favorite;

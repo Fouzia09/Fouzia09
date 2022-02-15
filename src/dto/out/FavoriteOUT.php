@@ -26,7 +26,7 @@ class FavoriteOUT {
     private $itemImage;
 
     /**
-     * @Groups("favorite:read")
+     * @Groups({"favorite:read", "user:read"})
      * 
      * @var string[]
      */

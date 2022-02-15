@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\dto\out\CommentOUT;
-use App\dto\out\FavoriteOUTFromUserOUT;
+use App\dto\out\FavoriteOUT;
 use App\dto\out\RestaurantOUT;
 use App\dto\out\RoomOUT;
 use App\dto\out\UserOUT;
@@ -39,8 +39,13 @@ class UserService
         if (count($user->getFavorites()) > 0)
         {
             foreach ($user->getFavorites() as $f) {
-                $favorite =
-                new FavoriteOUTFromUserOUT($f->getId(), $f->getItemName(), $f->getItemUrl(), $f->getItemImage());
+                $favorite = new FavoriteOUT(
+                    $f->getId(), $f->getItemName(), $f->getItemUrl(), $f->getItemImage()
+                );
+                
+                foreach ($f->getUsers() as $u) {
+                    $favorite->addUser($u->getId());
+                }
 
                 $userToSend->addFavorite($favorite);
             }

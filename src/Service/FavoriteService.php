@@ -25,8 +25,10 @@ class FavoriteService
      * 
      * @return FavoriteOUT
      */
-    public function findByItemUrl(string $itemUrl): FavoriteOUT {
+    public function findByItemUrl(string $itemUrl) {
         $favorite = $this->favoriteRepository->findByItemUrl($itemUrl);
+
+        if ($favorite == null) { return null; }
 
         $favoriteToSend = new FavoriteOUT(
             $favorite->getId(), $favorite->getItemName(), $favorite->getItemUrl(), $favorite->getItemImage()
