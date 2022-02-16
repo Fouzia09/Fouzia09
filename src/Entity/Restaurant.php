@@ -90,7 +90,7 @@ class Restaurant
     private $descriptifPlat;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=255)
      * 
      * @Groups({"restaurant:read", "restaurant:write"})
      */
@@ -109,27 +109,6 @@ class Restaurant
      * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $image2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * 
-     * @Groups({"restaurant:read", "restaurant:write"})
-     */
-    private $image3;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * 
-     * @Groups({"restaurant:read", "restaurant:write"})
-     */
-    private $descriptifPlat2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * 
-     * @Groups({"restaurant:read", "restaurant:write"})
-     */
-    private $descriptifPlat3;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -190,7 +169,7 @@ class Restaurant
     private $address;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      * 
      * @Groups({"restaurant:read", "restaurant:write"})
      */
@@ -280,12 +259,12 @@ class Restaurant
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setPrice(string $price): self
     {
         $this->price = $price;
 
@@ -312,42 +291,6 @@ class Restaurant
     public function setImage2(?string $image2): self
     {
         $this->image2 = $image2;
-
-        return $this;
-    }
-
-    public function getImage3(): ?string
-    {
-        return $this->image3;
-    }
-
-    public function setImage3(?string $image3): self
-    {
-        $this->image3 = $image3;
-
-        return $this;
-    }
-
-    public function getDescriptifPlat2(): ?string
-    {
-        return $this->descriptifPlat2;
-    }
-
-    public function setDescriptifPlat2(?string $descriptifPlat2): self
-    {
-        $this->descriptifPlat2 = $descriptifPlat2;
-
-        return $this;
-    }
-
-    public function getDescriptifPlat3(): ?string
-    {
-        return $this->descriptifPlat3;
-    }
-
-    public function setDescriptifPlat3(?string $descriptifPlat3): self
-    {
-        $this->descriptifPlat3 = $descriptifPlat3;
 
         return $this;
     }
@@ -478,12 +421,12 @@ class Restaurant
         return $this;
     }
 
-    public function getZipcode(): ?int
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(int $zipcode): self
+    public function setZipcode(string $zipcode): self
     {
         $this->zipcode = $zipcode;
 

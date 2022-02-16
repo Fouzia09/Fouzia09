@@ -66,9 +66,9 @@ class Room
     private $city;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"room:read", "room:write"})
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $price;
 
@@ -160,9 +160,9 @@ class Room
     private $address;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"room:read", "room:write"})
+     * @Groups({"restaurant:read", "restaurant:write"})
      */
     private $zipcode;
 
@@ -225,12 +225,12 @@ class Room
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function setPrice(string $price): self
     {
         $this->price = $price;
 
@@ -411,12 +411,12 @@ class Room
         return $this;
     }
 
-    public function getZipcode(): ?int
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(int $zipcode): self
+    public function setZipcode(string $zipcode): self
     {
         $this->zipcode = $zipcode;
 
