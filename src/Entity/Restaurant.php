@@ -131,7 +131,7 @@ class Restaurant
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="restaurants")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("room:read")
+     * @Groups("restaurant:read")
      */
     private $author;
 

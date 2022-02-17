@@ -68,7 +68,7 @@ class Room
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"restaurant:read", "restaurant:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $price;
 
@@ -162,7 +162,7 @@ class Room
     /**
      * @ORM\Column(type="string", length=255)
      * 
-     * @Groups({"restaurant:read", "restaurant:write"})
+     * @Groups({"room:read", "room:write"})
      */
     private $zipcode;
 
