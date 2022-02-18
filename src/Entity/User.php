@@ -26,8 +26,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "put",
  *          "reset_password"={
  *              "method"="PATCH",
- *              "path"="/users/{email}/reset-password",
- *              "controller"=App\Controller\ResetPasswordController::class
+ *              "path"="/users/{id}/reset-password",
+ *              "controller"=App\Controller\ResetPasswordController::class,
  *          },
  *          "delete"
  *      }
