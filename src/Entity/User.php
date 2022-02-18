@@ -21,6 +21,16 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "post",
  *          "collectionName_api_me"={"route_name"="api_me"}
  *     },
+ *      itemOperations={
+ *          "get",
+ *          "put",
+ *          "reset_password"={
+ *              "method"="PATCH",
+ *              "path"="/users/{email}/reset-password",
+ *              "controller"=App\Controller\ResetPasswordController::class
+ *          },
+ *          "delete"
+ *      }
  * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
