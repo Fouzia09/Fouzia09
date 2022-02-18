@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -35,6 +36,23 @@ class UserController extends AbstractController
 	public function findByUsername(string $username): Response
 	{
         $user = $this->userService->findByUsername($username);
+
+		if ($user != null) {
+			return $this->json($user, Response::HTTP_OK, [], ['groups' => ['user:read']]);
+		} else {
+			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 200);
+		}
+	}
+
+    /**
+     * @Route("/resetPassword/{email}", name="resetPassword")
+     * @param string $email
+     * 
+     * @return Response
+     */
+	public function resetPassword(string $email, MailerInterface $mailer): Response
+	{
+        $user = $this->userService->resetPassword($email, $mailer);
 
 		if ($user != null) {
 			return $this->json($user, Response::HTTP_OK, [], ['groups' => ['user:read']]);

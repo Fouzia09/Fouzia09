@@ -8,6 +8,8 @@ use App\dto\out\RestaurantOUT;
 use App\dto\out\RoomOUT;
 use App\dto\out\UserOUT;
 use App\Repository\UserRepository;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class UserService 
 {
@@ -83,5 +85,24 @@ class UserService
         }
         
         return $userToSend;
+    }
+
+    public function resetPassword(string $email, MailerInterface $mailer){
+        $user = $this->userRepository->findByEmail($email);
+
+        //envoi de mail au client
+        $email = (new TemplatedEmail())
+            ->from('gyfe@gmail.com')
+            ->to($email)
+            ->subject('Réinitialisation mot de passe')
+            ->htmlTemplate('emails/reset-password.html.twig')
+            ->context([
+                'password'=>$user->getPlainPassword(),
+            ]);
+
+            $mailer->send($email);
+
+            return $user;
+
     }
 }
