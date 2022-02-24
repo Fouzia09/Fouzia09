@@ -63,10 +63,10 @@ class UserService
         if (count($user->getRestaurants()) > 0)
         {
             foreach ($user->getRestaurants() as $r) {
-                $restaurant = new RestaurantOUT($r->getId(), $r->getName(), $r->getDescriptif(), $r->getCountry(),
-                    $r->getCity(), $r->getNamePlat(), $r->getPrice(), $r->getImage1(), $r->getImage2(),
-                    $r->getImage3(), $r->getCreatedAt(), $r->getDescriptifPlat(), $r->getDescriptifPlat2(),
-                    $r->getDescriptifPlat3(), $r->getRangePrice1(), $r->getRangePrice2(), $r->getAddress(),
+                $restaurant = new RestaurantOUT($r->getId(), $r->getName(), $r->getDescriptif(),
+                    $r->getCountry(), $r->getCity(), $r->getNamePlat(), $r->getPrice(),
+                    $r->getImage1(), $r->getImage2(), $r->getCreatedAt(), $r->getDescriptifPlat(),
+                    $r->getRangePrice1(), $r->getRangePrice2(), $r->getAddress(),
                     $r->getZipcode(), $r->getIsPublished(), $r->getUpdatedAt(), $r->getSlug());
 
                 $userToSend->addRestaurant($restaurant);

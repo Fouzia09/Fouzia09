@@ -56,7 +56,6 @@ class RoomController extends AbstractController
 		}
 	}
 
-
     /**
      * @Route("/filter/{value}", name="filter")
      * @param string $value
@@ -73,6 +72,22 @@ class RoomController extends AbstractController
 			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 200);
 		}
 	}
+
+    /**
+     * @Route("/threeLast", name="threeLastRooms")
+     * 
+     * @return Response
+     */
+    public function findThreeLast(): Response
+    {
+        $rooms = $this->roomService->findThreeLast();
+
+        if (sizeof($rooms) > 0) {
+            return $this->json($rooms, 200, [], ['groups' => ['room:read']]);
+        } else {
+            return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found']);
+        }
+    }
 
     // /**
     //  * @Route("/filter", name="filter")

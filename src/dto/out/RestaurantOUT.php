@@ -58,21 +58,6 @@ class RestaurantOUT {
     /**
      * @Groups({"restaurant:read", "user:read"})
      */
-    private $image3;
-
-    /**
-     * @Groups({"restaurant:read", "user:read"})
-     */
-    private $dishDescription2;
-
-    /**
-     * @Groups({"restaurant:read", "user:read"})
-     */
-    private $dishDescription3;
-
-    /**
-     * @Groups({"restaurant:read", "user:read"})
-     */
     private $rangePrice1;
 
     /**
@@ -120,11 +105,8 @@ class RestaurantOUT {
         float $price,
         string $image1,
         ?string $image2,
-        ?string $image3,
         \DateTime $createdAt,
         string $dishDescription,
-        ?string $dishDescription2,
-        ?string $dishDescription3,
         int $rangePrice1,
         int $rangePrice2,
         ?string $address,
@@ -143,9 +125,6 @@ class RestaurantOUT {
         $this->price = $price;
         $this->image1 = $image1;
         $this->image2 = $image2;
-        $this->image3 = $image3;
-        $this->dishDescription2 = $dishDescription2;
-        $this->dishDescription3 = $dishDescription3;
         $this->rangePrice1 = $rangePrice1;
         $this->rangePrice2 = $rangePrice2;
         $this->address = $address;
@@ -272,42 +251,6 @@ class RestaurantOUT {
     public function setImage2(string $image2): self
     {
         $this->image2 = $image2;
-
-        return $this;
-    }
-
-    public function getImage3(): ?string
-    {
-        return $this->image3;
-    }
-
-    public function setImage3(string $image3): self
-    {
-        $this->image3 = $image3;
-
-        return $this;
-    }
-
-    public function getDishDescription2(): ?string
-    {
-        return $this->dishDescription2;
-    }
-
-    public function setDishDescription2(string $dishDescription2): self
-    {
-        $this->dishDescription2 = $dishDescription2;
-
-        return $this;
-    }
-
-    public function getDishDescription3(): ?string
-    {
-        return $this->dishDescription3;
-    }
-
-    public function setDishDescription3(string $dishDescription3): self
-    {
-        $this->dishDescription3 = $dishDescription3;
 
         return $this;
     }

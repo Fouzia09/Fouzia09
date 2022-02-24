@@ -56,6 +56,21 @@ class RestaurantRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Restaurant[]
+     */
+    public function findThreeLast()
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere("r.isPublished = true")
+            ->setMaxResults(3)
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Restaurant[] Returns an array of Restaurant objects
     //  */

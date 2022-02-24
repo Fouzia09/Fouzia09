@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use Doctrine\DBAL\Driver\Connection;
+use App\dto\out\RoomOUT;
 use App\Repository\RoomRepository;
 
 class RoomService 
@@ -50,6 +50,27 @@ class RoomService
         $rooms[] = [];
             $rooms = $this->roomRepository->findByValue($value);
         return $rooms;
+    }
+
+    /**
+     * Les trois récentes chambres
+     * 
+     * @return RoomOUT[]
+     */
+    public function findThreeLast(): array {
+        $roomsToSend = [];
+        $rooms = $this->roomRepository->findThreeLast();
+
+        foreach ($rooms as $room) {
+            $roomToSend = new RoomOUT($room->getId(), $room->getName(), $room->getDescriptif(), $room->getCountry(),
+                    $room->getCity(), $room->getPrice(), $room->getImage1(), $room->getImage2(), $room->getImage3(),
+                    $room->getCreatedAt(), $room->getIsKingSize(), $room->getNbBed(), $room->getSquarFeet(), $room->getAddress(),
+                    $room->getZipcode(), $room->getIsPublished(), $room->getUpdatedAt(), $room->getSlug());
+
+            array_push($roomsToSend, $roomToSend);
+        }
+
+        return $roomsToSend;
     }
 
     // /**

@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use Doctrine\DBAL\Driver\Connection;
+use App\dto\out\RestaurantOUT;
 use App\Repository\RestaurantRepository;
 
 class RestaurantService 
@@ -52,6 +52,28 @@ class RestaurantService
         }
 
         return $restaurants;
+    }
+
+    /**
+     * Les trois récents restaurants
+     * 
+     * @return RestaurantOUT[]
+     */
+    public function findThreeLast(): array {
+        $restaurantsToSend = [];
+        $restaurants = $this->restaurantRepository->findThreeLast();
+
+        foreach ($restaurants as $restaurant) {
+            $restaurantToSend = new RestaurantOUT($restaurant->getId(), $restaurant->getName(), $restaurant->getDescriptif(),
+                $restaurant->getCountry(), $restaurant->getCity(), $restaurant->getNamePlat(), $restaurant->getPrice(),
+                $restaurant->getImage1(), $restaurant->getImage2(), $restaurant->getCreatedAt(), $restaurant->getDescriptifPlat(),
+                $restaurant->getRangePrice1(), $restaurant->getRangePrice2(), $restaurant->getAddress(),
+                $restaurant->getZipcode(), $restaurant->getIsPublished(), $restaurant->getUpdatedAt(), $restaurant->getSlug());
+
+            array_push($restaurantsToSend, $restaurantToSend);
+        }
+
+        return $restaurantsToSend;
     }
 
 }

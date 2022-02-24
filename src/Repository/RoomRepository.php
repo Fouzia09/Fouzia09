@@ -72,6 +72,20 @@ class RoomRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Room[]
+     */
+    public function findThreeLast()
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere("r.isPublished = true")
+            ->setMaxResults(3)
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     /*

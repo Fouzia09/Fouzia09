@@ -44,6 +44,7 @@ class RestaurantController extends AbstractController
             return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found']);
         }
     }
+
     /**
      * @Route("/filter/{value}", name="showPrice")
      * 
@@ -63,4 +64,19 @@ class RestaurantController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/threeLast", name="threeLastRestaurants")
+     * 
+     * @return Response
+     */
+    public function findThreeLast(): Response
+    {
+        $restaurants = $this->restaurantService->findThreeLast();
+
+        if (sizeof($restaurants) > 0) {
+            return $this->json($restaurants, 200, [], ['groups' => ['restaurant:read']]);
+        } else {
+            return $this->json(['status' => Response::HTTP_OK, 'message' => 'No data found']);
+        }
+    }
 }
