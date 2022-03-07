@@ -1,0 +1,13 @@
+{%  extends "email-layout.html.twig"%}
+
+{% block body %}
+    <h2>Bonjour,</h2>
+    <p>
+    Suite à votre demande, un nouveau mot de passe vous a été généré.
+    Ci-dessous, vous trouverez ce nouveau mot de passe : <br/><br/>
+    <strong>Votre nouveau Mot de Passe est :</strong> {{ password }} <br><br>
+    <strong>NB: </strong>Vous avez la possibilité de modifier votre mot de passe en accédant à votre espace " Mon compte " <br><br>
+    <a href="http://localhost:4200/login">Se connecter</a><br>
+    Cordialement,
+    </p>
+{% endblock %}

@@ -13,6 +13,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="`user`")
  * @ApiResource(
  *      normalizationContext={"groups"={"user:read"}},
  *      denormalizationContext={"groups"={"user:write"}},
@@ -21,16 +22,6 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "post",
  *          "collectionName_api_me"={"route_name"="api_me"}
  *     },
- *      itemOperations={
- *          "get",
- *          "put",
- *          "reset_password"={
- *              "method"="PATCH",
- *              "path"="/users/{id}/reset-password",
- *              "controller"=App\Controller\ResetPasswordController::class,
- *          },
- *          "delete"
- *      }
  * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
