@@ -40,7 +40,7 @@ class CommentController extends AbstractController
 		if (sizeof($comments) > 0) {
 			return $this->json($comments, Response::HTTP_OK, [], ['groups' => ['comment:read']]);
 		} else {
-			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 200);
+			return $this->json(['status' => Response::HTTP_NOT_FOUND, 'message' => 'No data found'], 404);
 		}
 	}
 }
